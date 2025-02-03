@@ -38,24 +38,36 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Task $task)
     {
         //
+        return TaskResource::make($task);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task)
     {
         //
+        $task->update([
+            'name' => $request->name,
+            // 'status' => $request->status,
+        ]);
+
+        return TaskResource::make($task);
     }
+  
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Task $task)
     {
         //
+        $task->delete();
+
+        return response()->json(['message' => 'Task deleted successfully'], 201);
     }
+  
 }
