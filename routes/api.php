@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\LogoutController;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\TaskController;
 use Illuminate\Http\Request;
@@ -22,6 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('tasks', TaskController::class);
+    Route::post('logout', LogoutController::class)->name('logout');
     
 });
 Route::post('register', RegisterController::class)->name('register');
+Route::post('login', LoginController::class)->name('login');
